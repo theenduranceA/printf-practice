@@ -28,7 +28,7 @@ int _printf(const char *format, ...)
 	};
 
 	va_start(args, format);
-	count = get_print(format, argument, ap);
+	count = my_print(format, argument, args);
 	va_end(args);
 	return (count);
 }
