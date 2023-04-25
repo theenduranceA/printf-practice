@@ -39,6 +39,6 @@ int _print_pointer(va_list args);
 int _print_reverse(va_list args);
 int _print_rot13(va_list args);
 char *convert(unsigned int num, int base);
-int my_printf(const char *format, print_type argument[], va_list args);
+int my_print(const char *format, print_type argument[], va_list args);
 
 #endif
