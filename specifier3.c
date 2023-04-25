@@ -44,6 +44,7 @@ int _print_octal(va_list args, flags_t *f)
  *
  * Return: the number of char printed
  */
+
 int _print_hex(va_list args, flags_t *f)
 {
 	unsigned int num = va_arg(args, unsigned int);

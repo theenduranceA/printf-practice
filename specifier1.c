@@ -1,35 +1,22 @@
 #include "main.h"
 
 /**
- * _print_int: Function that prints integer.
+ * _print_int - Function that prints an integer
  * @args: The specifier type.
- *
- * Return: Number printed.
+ * @f: Pointer to the struct.
+ * Return: number of char printed
  */
-
-int _print_int(va_list args)
+int _print_int(va_list args, flags_t *f)
 {
-	int x;
-	int y = 0;
-	int z = va_arg(ap, int);
+	int n = va_arg(args, int);
+	int res = count_digit(n);
 
-	if (z < 0)
-	{
-		y = y + _putchar('-');
-	}
-	for (x = 1000000000; x > 0; x /= 10)
-	{
-		if (z / i)
-		{
-			if ((z / x) % 10 < 0)
-				y = y + _putchar(-(z / x % 10) + '0');
-			else
-				y = y + _putchar((z / x % 10) + '0');
-		}
-		else if (z / x == 0 && x == 1)
-		{
-			y = y + _putchar(z / x % 10 + '0');
-		}
-	}
-	return (y);
+	if (f->space == 1 && f->plus == 0 && n >= 0)
+		res += _putchar(' ');
+	if (f->plus == 1 && n >= 0)
+		res += _putchar('+');
+	if (n <= 0)
+		res++;
+	print_number(n);
+	return (res);
 }
