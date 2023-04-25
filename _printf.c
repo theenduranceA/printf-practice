@@ -1,4 +1,8 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
+
 
 /**
  * _printf - My custom printf that replicates what printf does
@@ -10,25 +14,40 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count = 0;
-	print_type argument[] = {
-		{"c", _print_char},
-		{"s", _print_string},
-		{"%", _print_percent},
-		{"d", _print_int},
-		{"i", _print_int},
-		{"r", _print_reverse},
-		{"R", _print_rot13},
-		{"b", _print_binary},
-		{"u", _print_unsigned},
-		{"o", _print_octal},
-		{"x", _print_hex_l},
-		{"X", _print_hex_u},
-		{NULL, NULL}
-	};
+	int x;
+	int count;
+	int (*f)(va_list, flags_t *);
 
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+
+	count = 0;
 	va_start(args, format);
-	count = my_print(format, argument, args);
+	x = 0;
+	while (format[x] != '\0')
+	{
+		if (format[x] != '%')
+		{
+			_putchar(format[x]);
+			count = count + 1;
+		}
+		else
+		{
+			f = get_print(format[x + 1]);
+			if (f == NULL)
+			{
+				_putchar('%');
+				_putchar(format[x]);
+				count = count + 2;
+			}
+			else
+			{
+				count = count + f(args);
+				x = x + 1;
+			}
+		}
+		x = x + 1;
+	}
 	va_end(args);
 	return (count);
 }
